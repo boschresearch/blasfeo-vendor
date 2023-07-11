@@ -36,7 +36,7 @@ endif()
 
 set(BLASFEO_HEADERS_INSTALLATION_DIRECTORY  include/blasfeo CACHE STRING  "Default options for blasfeo.")
 set(BLASFEO_EXAMPLES                        OFF             CACHE BOOL    "Default options for blasfeo.")
-set(BUILD_SHARED_LIBS                       OFF             CACHE BOOL    "Default options for blasfeo.")
+set(BUILD_SHARED_LIBS                       ON              CACHE BOOL    "Default options for blasfeo.")
 
 ###############
 # BUILD LOGIC #
