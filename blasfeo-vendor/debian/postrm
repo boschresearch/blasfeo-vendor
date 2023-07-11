@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Remove symbolic links
+rm -f /usr/lib/libblasfeo.a
+rm -f /usr/lib/libblasfeo.so
+rm /usr/include/blasfeo
+rm /usr/cmake/blasfeo*.cmake

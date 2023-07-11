@@ -1,0 +1,5 @@
+repositories:
+  blasfeo-vendor/external/blasfeo:
+    type: git
+    url: https://github.com/giaf/blasfeo.git
+    version: master

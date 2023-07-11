@@ -16,7 +16,21 @@ The software is not ready for production use. It has neither been developed nor 
 
 ## Requirements, how to build, test, install, use, etc.
 
-Clone the repository into a ROS workspace and build it using [colcon](https://colcon.readthedocs.io/).
+Clone the repository into a ROS workspace, clone the dependencies using [vcstool](https://github.com/dirk-thomas/vcstool) and build it using [colcon](https://colcon.readthedocs.io/).
+
+### Clone repository and depencencies
+
+Clone repository into you ROS workspace:
+```bash
+cd <workspace>/src
+git clone https://github.com/boschresearch/blasfeo-vendor.git
+```
+
+clone dependencies:
+```bash
+cd <workspace>/src/blasfeo-vendor
+vcs import < dependencies.repos
+```
 
 
 ## License
@@ -36,4 +50,4 @@ The colcon_test tool is used for quality assurances, which includes cpplint, unc
 Please notice the following issues/limitations:
 
 * This vendor package only builds the C library, and not the Python and Matlab/Octave interfaces.
-
+* The integration of building Debian packages is not yet completed.

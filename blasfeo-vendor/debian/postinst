@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ "$(uname -m)" = "x86_64" ]; then
+    CPU_INFO="$(cat /proc/cpuinfo)"
+
+    if [ ! -z "$(echo ${CPU_INFO} | grep Intel)" ]; then
+        if [ ! -z "$(echo ${CPU_INFO} | grep avx2)" ]; then
+            TARGET=X64_INTEL_HASWELL
+        elif [ ! -z "$(echo ${CPU_INFO} | grep avx)" ]; then
+            TARGET=X64_INTEL_SANDY_BRIDGE
+        elif [ ! -z "$(echo ${CPU_INFO} | grep ssse3)" ]; then
+            TARGET=X64_INTEL_CORE
+        else
+            TARGET=GENERIC
+        fi
+    elif [ ! -z "$(echo ${CPU_INFO} | grep AMD)" ]; then
+        if [ ! -z "$(echo ${CPU_INFO} | grep avx | grep fma)" ]; then
+            TARGET=X64_AMD_BULLDOZER
+        else
+            TARGET=GENERIC
+        fi
+    else
+        TARGET=GENERIC
+    fi
+
+    if test -f "/opt/blasfeo/${TARGET}/lib/libblasfeo.a"; then
+        ln -sf /opt/blasfeo/${TARGET}/lib/libblasfeo.a /usr/lib/libblasfeo.a
+    fi
+
+    if test -f "/opt/blasfeo/${TARGET}/lib/libblasfeo.so"; then
+        ln -sf /opt/blasfeo/${TARGET}/lib/libblasfeo.so /usr/lib/libblasfeo.so
+    fi
+
+    ln -snf /opt/blasfeo/${TARGET}/include/blasfeo /usr/include/blasfeo
+    ln -snf /opt/blasfeo/${TARGET}/cmake/*.cmake /usr/cmake/
+fi
